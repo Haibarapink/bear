@@ -1,0 +1,1 @@
+add_executable(replacer_test replacer_tests.cc)
