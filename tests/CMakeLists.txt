@@ -1,1 +1,2 @@
 add_executable(replacer_test replacer_tests.cc)
+add_executable(sync_io_test sync_io_test.cc)
