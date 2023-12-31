@@ -73,8 +73,8 @@ public:
         if (wr_ok == -1) {
             return false;
         }
-
-        return true;
+        auto flush_ok = fsync(fd_);
+        return flush_ok == 0;
     }
 
     void close() {

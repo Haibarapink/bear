@@ -138,14 +138,17 @@ public:
         }
     }
 
+    // write -> fsync
+    // 立即落盘
+    bool write(page* p) {
+        return store_mgr_.write(p->data, page_cfg::PAGE_SIZE, p->pid.page_no * page_cfg::PAGE_SIZE);
+    }
 private:
     bool read(page* p) {
         assert(p->pid.page_no != page_id::INVALID_PAGE && p->pid.fd == fd_ && fd_ != page_id::INVALID_FD);
         return store_mgr_.read(p->data, page_cfg::PAGE_SIZE, page_cfg::PAGE_SIZE *p->pid.page_no);
     }
-    bool write(page* p) {
-        return store_mgr_.write(p->data, page_cfg::PAGE_SIZE, p->pid.page_no * page_cfg::PAGE_SIZE);
-    }
+
 private:
     int fd_ = page_id::INVALID_FD;
     std::unique_ptr<uint8_t> buffer_;
